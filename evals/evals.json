@@ -1,0 +1,52 @@
+{
+  "skill": "justin-writing-style",
+  "version": "1.2.0",
+  "updated": "2026-08-28",
+  "note": "静态用例集：T*=应触发并合规生成；N*=不应触发（近邻意图）；C*=机械校验合规。部署后每 90 天复验一次命中率。",
+  "cases": [
+    {
+      "id": "T1",
+      "type": "trigger",
+      "prompt": "用克制白描风格写一篇第一人称回忆录，题材：我和发小的二十年",
+      "expected": "触发本 skill；走完 Step1-5；五要素齐备（缺项用一轮选择题追问）；输出含 --- 分节制正文与 12 项风格自检表且全 pass"
+    },
+    {
+      "id": "T2",
+      "type": "trigger",
+      "prompt": "模仿 Justin 那种冰山理论的写法，写一个关于失去的故事，不要抒情",
+      "expected": "触发本 skill；情感全部转译为动作/物件/数字（E1）；结尾反高潮不回答核心问题（R12）"
+    },
+    {
+      "id": "T3",
+      "type": "trigger",
+      "prompt": "帮我写一篇留白式的第一人称叙事，主角把钱借给老同学之后",
+      "expected": "触发本 skill；金钱只配操作动词（R6）；配置载情物件 3-5 个与精确数字 >=10 个（E2/E3）"
+    },
+    {
+      "id": "N1",
+      "type": "anti_trigger",
+      "prompt": "写一篇小红书种草文案，推荐一款面霜",
+      "expected": "不触发。营销文案属不适用文体（description 排斥声明 + 诚实边界），应路由到内容营销类 skill"
+    },
+    {
+      "id": "N2",
+      "type": "anti_trigger",
+      "prompt": "写一篇议论文，论证坚持的重要性",
+      "expected": "不触发。说理文需要明确观点输出，与本风格'拒绝解释'内核冲突（诚实边界）"
+    },
+    {
+      "id": "N3",
+      "type": "anti_trigger",
+      "prompt": "写个抖音带货短视频脚本，卖点前置",
+      "expected": "不触发。短视频带货脚本属转化型内容创作，非克制白描叙事"
+    },
+    {
+      "id": "C1",
+      "type": "compliance",
+      "prompt": "（内部）用 scripts/style_lint.py 校验违规样文",
+      "sample": "她笑着说，\"表停了怎么办。\"\n我感到很难过。\n我犹豫了好几天，最后还是花了几千块。\n这是第一句。这是第二句。这是第三句。这是第四句。\n像一支笔。像两支军队。像一门手艺。像一场雨。\n后来我才明白，她早就走了。",
+      "expected": "lint 检出 R1/R2/R4/R5/R7/R12 全部违规类别，退出码 1；对 worked-example 干净片段校验应 PASS 退出码 0",
+      "command": "python3 scripts/style_lint.py - <<< \"$SAMPLE\""
+    }
+  ]
+}
