@@ -9,15 +9,6 @@
 
 ![justin-writing-style](./justin-writing-style.png)
 
-## 安装
-
-将本目录放入宿主平台的 skills 路径，例如 Trae：
-
-```
-<project>/.trae/skills/justin-writing-style/
-```
-
-无第三方依赖；`scripts/style_lint.py` 仅需 Python 3 标准库。
 
 ## 使用方法
 
