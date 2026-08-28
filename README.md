@@ -19,7 +19,33 @@
 
 无第三方依赖；`scripts/style_lint.py` 仅需 Python 3 标准库。
 
-## 使用
+## 使用方法
+
+本 skill 本质是一个目录（`SKILL.md` + `references/` + `scripts/`）。任何「读取目录内 `SKILL.md` 并按指令执行」的 AI 智能体都能直接用。只需两步：① 把文件夹放进对应智能体的技能目录；② 用自然语言触发。
+
+### 在各 AI 智能体中安装
+
+| 智能体 | 技能目录（把本文件夹整个放进去） | 触发方式 |
+|--------|--------------------------------|----------|
+| **WorkBuddy** | `~/.workbuddy/skills/justin-writing-style/` | 直接说，见下 |
+| **Trae** | `<project>/.trae/skills/justin-writing-style/` | 直接说 |
+| **OpenClaw** | 平台技能目录 | 直接说 |
+| **Codex** | 项目内 `skills/justin-writing-style/`，或在提示词里直接贴 `SKILL.md` 内容 | 直接说 / 引用 |
+| **其他（Cursor / Claude Code 等）** | 任意被智能体读取的 `skills/` 或 `agents/` 目录 | 直接说 |
+
+> 放好后无需额外配置。无第三方依赖，`scripts/style_lint.py` 仅需 Python 3 标准库。
+
+### 触发示例（复制即用）
+
+直接对智能体说一句即可：
+
+- 「用克制白描风格写一篇第一人称回忆录，题材：我和发小的二十年」
+- 「模仿 Justin 那种冰山理论的写法写个故事，不要抒情」
+- 「用 justin-writing-style 风格，写一段关于失去的短文」
+
+智能体会自动按五步执行，产出正文 + 自检表（详见下文「写作流程」）。
+
+## 写作流程（五步 + 自检）
 
 对模型说出触发意图即可，例如：
 
@@ -71,6 +97,12 @@ justin-writing-style/
 - 规则提取自单一叙事长文样本，存在单样本过拟合风险。
 - references 中示范片段均为按规则自创的风格示意，非任何原文摘录。
 - 用本 skill 生成涉及真实人物的文本时，应附带虚构声明。
+
+## 加入群聊
+
+<div align="center">
+  <img src="https://qomob.ai/xskill.jpg" width="600" alt="XSkill">
+</div>
 
 ## 许可
 
